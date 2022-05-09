@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Matchs extends Model
+{
+    use HasFactory;
+    public function events(){
+        return $this->hasMany(Event::class,'match_id','id');
+    }
+    public function account_odds(){
+        return $this->hasMany(AccountOdds::class,'match_id','id');
+    }
+    public function players(){
+        return $this->belongsToMany(Player::class,'lines_up','match_id','player_id');
+    }
+    public function teams(){
+        return $this->belongsToMany(Team::class,'lines_up','match_id','team_id');
+    }
+    public function rounds(){
+        return $this->hasMany(Round::class,'round_id','id');
+    }
+    public function stadium(){
+        return $this->belongsTo(Stadium::class,'stadium_id','id');
+    }
+    public function local_team(){
+        return $this->belongsTo(Team::class,'localTeam_id','id');
+    }
+    public function visitor_team(){
+        return $this->belongsTo(Team::class,'visitorTeam_id','id');
+    }
+}
