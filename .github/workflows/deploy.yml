@@ -5,10 +5,10 @@ name: Deploy
 on:
   push:
     branches:
-      - production
+      - main
   pull_request:
     branches:
-      - production
+      - main
       
 # Authenticate to the the server via ssh 
 # and run our deployment script 
@@ -23,5 +23,5 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
-          key: ${{ secrets.SSHKEY }}
-          script: "cd /var/www/html && ./.scripts/deploy.sh"
+          key: ${{ secrets.SOHA_KEY }}
+          script: "cd /var/www/soha-worldcup && ./.scripts/deploy.sh"
