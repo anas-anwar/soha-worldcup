@@ -24,4 +24,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SOHA_KEY }}
-          script: "cd /var/www/soha-worldcup && ./.scripts/deploy.sh"
+          script: "cd /var/www/soha-worldcup && .scripts/deploy.sh"
