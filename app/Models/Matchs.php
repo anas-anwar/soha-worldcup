@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Matchs extends Model
 {
     use HasFactory;
+    protected $tabel="matchs";
+    protected $fillable =["date","end","start","round_id","stadium_id","localteam_id",'visitorteam_id'];
     public function events(){
         return $this->hasMany(Event::class,'match_id','id');
     }
@@ -27,9 +29,9 @@ class Matchs extends Model
         return $this->belongsTo(Stadium::class,'stadium_id','id');
     }
     public function local_team(){
-        return $this->belongsTo(Team::class,'localTeam_id','id');
+        return $this->belongsTo(Team::class,'localteam_id','id');
     }
     public function visitor_team(){
-        return $this->belongsTo(Team::class,'visitorTeam_id','id');
+        return $this->belongsTo(Team::class,'visitorteam_id','id');
     }
 }

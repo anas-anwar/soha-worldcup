@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Player extends Model
 {
     use HasFactory;
-    protected $primaryKey ="player_id";
+   
+    public $timestamps = false;
     protected $fillable=['player_id','name','nationality','birthdate','height','weight'];
     public function team(){
         return $this->belongsTo(Team::class,'team_id','id');

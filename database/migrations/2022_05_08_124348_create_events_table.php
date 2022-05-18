@@ -20,7 +20,7 @@ class CreateEventsTable extends Migration
             $table->foreignId('player_id')->constrained('players')->cascadeOnDelete();
             $table->foreignId('typeOfEvent_id')->constrained('type_of_events')->cascadeOnDelete(); 
             
-            $table->time('time');
+            $table->date('date');
         });
     }
 

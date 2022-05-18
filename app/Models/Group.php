@@ -9,8 +9,9 @@ class Group extends Model
 {
     use HasFactory;
     protected $fillable=['name'];
-    protected $primaryKey ="group_id";
+    public $timestamps = false;
+   
     public function team(){
-        return $this->belongsTo(Team::class,'group_id','id');
+        return $this->hasMany(Team::class,'group_id','id');
     }
 }

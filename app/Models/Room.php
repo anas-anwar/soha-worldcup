@@ -12,6 +12,6 @@ class Room extends Model
     use SoftDeletes ;
     protected $fillable=['hotel_id','type','price','url'];
     public function hotel(){
-        return $this->belongsTo(Hotel::class,'room_id','id');
+        return $this->belongsTo(Hotel::class,'hotel_id','id');
     }
 }

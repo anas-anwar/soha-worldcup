@@ -10,9 +10,9 @@ class Hotel extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $fillable=['name','description','phone','rate','latitude','longtude','address','hotel_url'];
+    protected $fillable=['name','description','phone','rate','latitude','longtude','address','hotel_url',"room_id"];
     public function rooms(){
-        return $this->hasMany(Room::class,'room_id','id');
+        return $this->hasMany(Room::class,'hotel_id','id');
     }
     public function images(){
         return $this->morphMany(Images::class,'model');

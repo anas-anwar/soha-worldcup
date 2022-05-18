@@ -10,7 +10,7 @@ class Stadium extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $fillable=['name','description','phone','capacity','latitude','longtude','address','list_of_images'];
+    protected $fillable=['name','description','phone','capacity','latitude','longtude','address'];
     public function images(){
         return $this->morphMany(Images::class,'model');
     }

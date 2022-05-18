@@ -16,10 +16,10 @@ class CreateStadiaTable extends Migration
         Schema::create('stadia', function (Blueprint $table) {
             $table->id();
             $table->string('name',50);
-            $table->string('description',50);
-            $table->integer('phone');
-            $table->integer('capacity');
-            $table->string('address',50);
+            $table->text('description');
+            $table->string('phone',20);
+            $table->double('capacity');
+            $table->string('address',255);
             $table->double('longtude');
             $table->double('latitude');
             $table->softDeletes();
