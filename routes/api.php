@@ -45,3 +45,4 @@ Route::apiResource('teams',TeamsController::class);
 
 Route::get("mobile/matches",[App\Http\Controllers\Api\Mobile\MatchesController::class,'index']);
 Route::get("mobile/stadiums",[App\Http\Controllers\Api\Mobile\StadiumsController::class,'index']);
+Route::get("mobile/stadiums/{id}",[App\Http\Controllers\Api\Mobile\StadiumsController::class,'show']);
