@@ -13,7 +13,7 @@ class Round extends Model
     
     protected $fillable=['name'];
     public function match(){
-        return $this->belongsTo(Matchs::class,'round_id','id');
+        return $this->belongsTo(Matches::class,'round_id','id');
     }
     
 }

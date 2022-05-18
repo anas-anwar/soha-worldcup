@@ -10,7 +10,7 @@ class AccountOdds extends Model
     use HasFactory;
     protected $fillable=['vote','match_id','account_id'];
     public function match(){
-        return $this->belongsTo(Matchs::class,'match_id','id');
+        return $this->belongsTo(Matches::class,'match_id','id');
     }
     public function account(){
         return $this->belongsTo(Account::class,'account_id','id');

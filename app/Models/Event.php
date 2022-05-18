@@ -11,7 +11,7 @@ class Event extends Model
     public $timestamps = false;
     protected $fillable=['match_id','team_id','player_id','typeOfEvent_id','date'];
     public function match(){
-        return $this->belongsTo(Matchs::class,'match_id','id');
+        return $this->belongsTo(Matches::class,'match_id','id');
     }
     public function player(){
         return $this->belongsTo(Player::class,'player_id','id');

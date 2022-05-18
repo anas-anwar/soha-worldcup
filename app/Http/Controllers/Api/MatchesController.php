@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Matchs;
+use App\Models\Matches;
 use Illuminate\Http\Request;
 
 class MatchesController extends Controller
@@ -15,7 +15,7 @@ class MatchesController extends Controller
      */
     public function index()
     {
-        $matches=Matchs::with(['events','players','local_team','visitor_team'])->get();
+        $matches=Matches::with(['events','players','local_team','visitor_team'])->get();
         return response()->json($matches);  
     }
 
@@ -33,7 +33,7 @@ class MatchesController extends Controller
             "localteam_id"=>"required|different:visitorteam_id",
             "visitorteam_id"=>"required|different:localteam_id"
         ]);
-        $match=Matchs::create($request->all());
+        $match=Matches::create($request->all());
         $match->refresh();
         return response()->json($match,201);
     }
@@ -46,7 +46,7 @@ class MatchesController extends Controller
      */
     public function show($id)
     {
-        $matche=Matchs::with(['events','players','local_team','visitor_team'])->findOrFail($id);
+        $matche=Matches::with(['events','players','local_team','visitor_team'])->findOrFail($id);
         return response()->json($matche);
     }
 
@@ -59,7 +59,7 @@ class MatchesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $match=Matchs::findOrFail($id);
+        $match=Matches::findOrFail($id);
         $request->validate([
             "round_id"=>"sometimes|required",
             "stadium_id"=>"sometimes|required",
@@ -67,7 +67,7 @@ class MatchesController extends Controller
             "visitorteam_id"=>"sometimes|required|different:localteam_id"
         ]);
 
-        $match=Matchs::findOrFail($id);
+        $match=Matches::findOrFail($id);
         $match->update($request->all());
         if($match->localteam_id==$match->visitorteam_id){
         return response()->json([
@@ -90,7 +90,7 @@ class MatchesController extends Controller
      */
     public function destroy($id)
     {
-        $match=Matchs::findOrFail($id);
+        $match=Matches::findOrFail($id);
         $match->delete();
         return response()->json([
             "message"=>"Match Deleted",

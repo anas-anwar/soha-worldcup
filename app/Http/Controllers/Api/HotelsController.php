@@ -18,8 +18,12 @@ class HotelsController extends Controller
      */
     public function index()
     {
-        $hotels = Hotel::all();
-        return response()->json($hotels);
+        $hotels = Hotel::with('images')->get();
+        return response()->json([
+            "status" => true,
+            'message' => 'success',
+            'data' => $hotels
+        ]);
     }
 
     /**
@@ -47,7 +51,11 @@ class HotelsController extends Controller
         );
         $hotel = Hotel::create($request->all());
         $hotel->refresh();
-        return response()->json($hotel, 201);
+        return response()->json([
+            "status" => true,
+            'message' => 'success',
+            'data' => $hotel
+        ], 201);
     }
 
     /**
@@ -60,6 +68,11 @@ class HotelsController extends Controller
     {
         $hotel = Hotel::findOrFail($id);
         return response()->json($hotel, 201);
+        return response()->json([
+            "status" => true,
+            'message' => 'success',
+            'data' => $hotel
+        ], 201);
     }
 
     /**
@@ -81,15 +94,13 @@ class HotelsController extends Controller
                 "longtude" => "sometimes|required",
                 "address" => 'sometimes|required',
                 "hotel_url" => "sometimes|required"
-
-
-
             ]
         );
         $hotel = Hotel::findOrFail($id);
         $hotel->update($request->all());
         return response()->json(
             [
+                "status" => true,
                 'message' => 'Hotel updated ^_^',
                 'data' => $hotel
             ]
@@ -108,6 +119,7 @@ class HotelsController extends Controller
         $hotel->delete();
         return response()->json(
             [
+                "status" => true,
                 'message' => 'Hotel deleted',
                 'data' => $hotel
             ]
@@ -132,6 +144,7 @@ class HotelsController extends Controller
                 $service_R = new Service(["type" => $service->type]);
                 $hotel->services()->saveMany([$service_R]);
                 return response([
+                    "status" => true,
                     "message" => "Service added ^_^",
                     "data" => ["name" => $hotel->name, "type of services" => $types]
                 ]);
@@ -139,11 +152,12 @@ class HotelsController extends Controller
         }
         if (in_array($request->type, $types)) {
             return response([
+                "status" => false,
                 "message" => "This service already exist",
-
             ]);
         }
         return response([
+            "status" => false,
             "message" => "This service doesn't exist",
 
         ]);
@@ -156,12 +170,14 @@ class HotelsController extends Controller
         $hotel = Hotel::with('images')->findOrFail($id);
 
         if (!$request->hasFile('fileName')) {
-            return response()->json(['upload_file_not_found'], 400);
+            return response()->json([
+                "status" => false,
+                'message' => 'upload_file_not_found'
+            ], 400);
         }
 
         $allowedfileExtension = ['pdf', 'jpg', 'png'];
         $file = $request->file('fileName');
-
 
 
 
@@ -172,33 +188,34 @@ class HotelsController extends Controller
         if ($check) {
 
 
-            $path = $file->store('public/images');
+            $path = $file->store('storage/images');
             $name = $file->getClientOriginalName();
 
             //store image file into directory and db
-            $save = new Images();
-            $save->name = $name;
-            $save->image_url = $path;
-            $save->save();
+            // $save = new Images();
+            // $save->name = $name;
+            // $save->image_url = $path;
+            // $save->save();
+
+
             $hotel->images()->saveMany([
                 new Images(["name" => $name, "image_url" => $path])
             ]);
 
             return response()->json([
+                "status" => true,
                 "message" => "Image uploaded ^-^",
                 "data" => [
                     "name" => $hotel->name,
                     "images" =>
                     $hotel->images()->get()
-
-
                 ]
             ]);
         } else {
             return response()->json([
-                "code" => "422",
+                "status" => false,
                 "message" => 'invalid_file_format'
-            ]);
+            ],422);
         }
     }
 
@@ -233,6 +250,7 @@ class HotelsController extends Controller
                 "price"=>$request->price
             ]);
            return response([
+               "status" => true,
                "message"=>"Service added ^_^",
                "data"=>["name"=>$hotel->name,"Room"=>$new_room]
            ]);

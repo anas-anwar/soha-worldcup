@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class MatchsFactory extends Factory
+class MatchesFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -23,7 +23,7 @@ $date= Carbon::create($this->faker->date()) ;
             "visitorteam_id"=>rand(6,10),
             "start"=>$starts_at,
             "end"=>$ends_at,
-            "date"=>$date
+            // "date"=>$date
         ];
     }
 }

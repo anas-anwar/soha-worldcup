@@ -18,6 +18,6 @@ class Player extends Model
         return $this->hasMany(Event::class,'player_id','id');
     }
     public function matchs(){
-        return $this->belongsToMany(Matchs::class,'lines_up','player_id','match_id');
+        return $this->belongsToMany(Matches::class,'lines_up','player_id','match_id');
     }
 }

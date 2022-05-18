@@ -18,6 +18,6 @@ class Stadium extends Model
         return $this->hasOne(Team::class,'staduim_id','id');
     }
     public function matchs(){
-        return $this->hasMany(Matchs::class,'staduim_id','id');
+        return $this->hasMany(Matches::class,'staduim_id','id');
     }  
 }

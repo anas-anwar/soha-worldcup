@@ -13,7 +13,7 @@ class CreateMatchesTable extends Migration
      */
     public function up()
     {
-        Schema::create('matchs', function (Blueprint $table) {
+        Schema::create('matches', function (Blueprint $table) {
             $table->id();
             $table->time("start");
             $table->time("end");

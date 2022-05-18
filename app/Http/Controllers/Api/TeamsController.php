@@ -98,9 +98,9 @@ class TeamsController extends Controller
         $team = Team::findOrFail($id);
         $logo=$team->logo;
         if ($file = $request->file('fileName')) {
-            $logo = $file->store('public/images/logo');
+            $logo = $file->store('storage/images/logo');
 
-            Storage::delete('/public/images/logo'.$team->logo);
+            Storage::delete('/images/logo'.$team->logo);
             //store your file into directory and db
 
 

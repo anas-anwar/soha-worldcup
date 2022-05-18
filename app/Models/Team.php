@@ -28,6 +28,6 @@ class Team extends Model
         return $this->hasMany(AccountOdds::class,'vote','id');
     }
     public function matchs(){
-        return $this->belongsToMany(Matchs::class,'lines_up','team_id','match_id');
+        return $this->belongsToMany(Matches::class,'lines_up','team_id','match_id');
     }
 }

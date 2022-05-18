@@ -189,14 +189,14 @@ class ResturentsController extends Controller
         if ($check) {
 
 
-            $path = $file->store('public/images');
+            $path = $file->store('storage/images');
             $name = $file->getClientOriginalName();
 
             //store image file into directory and db
-            $save = new Images();
-            $save->name = $name;
-            $save->image_url = $path;
-            $save->save();
+            // $save = new Images();
+            // $save->name = $name;
+            // $save->image_url = $path;
+            // $save->save();
             $resturent->images()->saveMany([
                 new Images(["name" => $name, "image_url" => $path])
             ]);
