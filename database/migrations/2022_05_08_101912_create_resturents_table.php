@@ -18,10 +18,10 @@ class CreateResturentsTable extends Migration
             $table->string('name',50);
             $table->time('hour_open');
             $table->time('hour_close');
-            $table->integer('phone');
-            $table->string('rate',50);
-            $table->string('address',50);
-            $table->string('Menue_url',50);
+            $table->string('phone');
+            $table->integer('rate');
+            $table->string('address',255);
+            $table->string('menu_url',255)->nullable();
             $table->double('longtude');
             $table->double('latitude');
             $table->softDeletes();
